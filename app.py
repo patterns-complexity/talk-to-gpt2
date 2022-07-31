@@ -1,7 +1,6 @@
 import numpy as np
 from multiprocessing import Process, Queue
 from sounddevice import InputStream
-from autocorrect import Speller
 from torch import device, Tensor
 from torch.cuda import is_available as is_cuda_available
 import pyttsx3
@@ -58,7 +57,6 @@ if __name__ == '__main__':
   # initialize the text-to-speech engine
   print('Initializing the text-to-speech engine...')
   engine = pyttsx3.init()
-  speller = Speller(lang=LANG_ID)
 
   # initialize main loop variables
   print('Initializing main loop variables...')

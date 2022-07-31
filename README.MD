@@ -53,7 +53,35 @@ Select a device:
 If I want to pick the `Speakers (Focusrite Usb Audio)` device I type in `3` and press enter.
 
 ## Credits
-@TODO: Add credits (work in progress)
+```
+@inproceedings{Wolf_Transformers_State-of-the-Art_Natural_2020,
+author = {Wolf, Thomas and Debut, Lysandre and Sanh, Victor and Chaumond, Julien and Delangue, Clement and Moi, Anthony and Cistac, Perric and Ma, Clara and Jernite, Yacine and Plu, Julien and Xu, Canwen and Le Scao, Teven and Gugger, Sylvain and Drame, Mariama and Lhoest, Quentin and Rush, Alexander M.},
+month = {10},
+pages = {38--45},
+publisher = {Association for Computational Linguistics},
+title = {{Transformers: State-of-the-Art Natural Language Processing}},
+url = {https://www.aclweb.org/anthology/2020.emnlp-demos.6},
+year = {2020}
+}
+```
 
 ## Requirements
-@TODO: Add requirements (work in progress)
+Firstly, you need to install the appropriate `PyTorch` and `torchaudio` version.
+
+I used these versions:
+```
+torch==1.11.0+cu113
+torchaudio==0.11.0+cu113
+```
+
+I did **NOT** include it in the `requirements.txt` file because people use many different versions of `PyTorch` and `torchaudio` and this project should work with most versions.
+
+Those are the main requirements for this project:
+```
+numpy==1.22.3
+PySoundFile==0.9.0.post1
+pyttsx3==2.90
+sounddevice==0.4.4
+soundfile==0.10.3.post1
+transformers==4.21.0.dev0
+```
