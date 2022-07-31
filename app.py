@@ -1,9 +1,10 @@
 import numpy as np
+import pyttsx3
+import argparse
 from multiprocessing import Process, Queue
 from sounddevice import InputStream
 from torch import device, Tensor
 from torch.cuda import is_available as is_cuda_available
-import pyttsx3
 
 from classes.AudioManager import AudioDeviceManager as adm, AudioFileManager as afm
 from classes.SpeechRecognizer import SpeechRecognizer as sr
@@ -25,15 +26,36 @@ def record_audio(q: Queue, device_index: int):
         q.put(process_q.get())
 
 if __name__ == '__main__':
-  # define constants
-  print('Defining constants...')
-  THRESHOLD = 0.003
-  NOISE_LEVEL_CAPTURE_TIMEOUT = 10
-  TALKING_TIMEOUT = 120
-  LANG_ID = "en"
-  SR_MODEL_ID = "jonatasgrosman/wav2vec2-large-xlsr-53-english"
-  TG_MODEL_ID = "gpt2-large"
-  FILE_NAME = "audio.wav"
+  # load the above constants from cli arguments
+  print('Loading constants from cli arguments...')
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--al', '--audio-level-threshold', type=float, default=0.003)
+  parser.add_argument('--nl', '--noise-evaluation-time', type=int, default=10)
+  parser.add_argument('--ttt', '--time-to-talk', type=int, default=120)
+  parser.add_argument('--lang', '--language', type=str, default="en")
+  parser.add_argument('--srm', '--speech-recognition-model', type=str, default="jonatasgrosman/wav2vec2-large-xlsr-53-english")
+  parser.add_argument('--tgm', '--text-generation-model', type=str, default="gpt2-large")
+  parser.add_argument('--tempfile', '--audio-temp-file-path', type=str, default="audio.wav")
+  parser.add_argument('--top-p', type=float, default=0.9)
+  parser.add_argument('--top-k', type=int, default=0)
+  parser.add_argument('--temperature', type=float, default=1.0)
+
+
+  # parse the cli arguments
+  args = parser.parse_args()
+  print('Parsed cli arguments:')
+  print(args)
+
+  THRESHOLD: float = args.al
+  NOISE_LEVEL_CAPTURE_TIMEOUT: int = args.nl
+  TALKING_TIMEOUT: int = args.ttt
+  LANG_ID: str = args.lang
+  SR_MODEL_ID: str = args.srm
+  TG_MODEL_ID: str = args.tgm
+  FILE_NAME: str = args.tempfile
+  TOP_P: float = args.top_p
+  TOP_K: int = args.top_k
+  TEMPERATURE: float = args.temperature
 
   # set the computing device to cuda if available
   print('Setting the computing device to cuda if available...')
@@ -132,9 +154,9 @@ if __name__ == '__main__':
     question, answer = tg.predict(
       text,
       initial_script=conversation_script,
-      top_p=98,
-      temperature=0.6,
-      top_k=0,
+      top_p=TOP_P,
+      top_k=TOP_K,
+      temperature=TEMPERATURE,
       do_sample=True,
     )
 
