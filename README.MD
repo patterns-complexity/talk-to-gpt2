@@ -2,6 +2,8 @@
 
 ## Installation
 
+**This project was tested on Python 3.9.**
+
 Clone the repository:
 ```
 git clone https://github.com/patterns-complexity/talk-to-gpt2.git
