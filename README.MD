@@ -68,22 +68,13 @@ This project wouldn't even be possible if not for the amazing work of [huggingfa
 
 
 ## Requirements
-Firstly, you need to install the appropriate `PyTorch` and `torchaudio` version.
-
-I used these versions:
-```
-torch==1.11.0+cu113
-torchaudio==0.11.0+cu113
-```
-
-I did **NOT** include it in the `requirements.txt` file because people use many different versions of `PyTorch` and `torchaudio` and this project should work with most versions.
-
-Those are the main requirements for this project:
+Those are the main requirements for this project (`requirements.txt`):
 ```
 numpy==1.22.3
-PySoundFile==0.9.0.post1
 pyttsx3==2.90
 sounddevice==0.4.4
-soundfile==0.10.3.post1
-transformers==4.21.0.dev0
+SoundFile==0.10.3.post1
+torch==1.11.0
+torchaudio==0.11.0+cu113
+transformers==4.21.0
 ```

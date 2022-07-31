@@ -128,10 +128,10 @@ if __name__ == '__main__':
         if(threshold_reached):
           spoken = True
           print('I hear you!', audio_mean, '>' , min_audio_level)
-          audio_array = np.append(audio_array, audio, axis=0)
           timeout = 0
 
         if(spoken):
+          audio_array = np.append(audio_array, audio, axis=0)
           timeout += 1
 
         if((timeout > TALKING_TIMEOUT) and spoken and len(audio_array[:]) > 0):
@@ -146,6 +146,7 @@ if __name__ == '__main__':
     audio_file: Tensor = sr.load_audio_file(FILE_NAME)
     audio_file: Tensor = sr.resample_audio_file(audio_file, original_sample_rate=44100, new_sample_rate=16000)
     text: str = sr.predict(audio_file)
+    print('I heard:', text)
 
     print('Loading conversation script...')
     with open('conversation-script.txt', 'r') as f:

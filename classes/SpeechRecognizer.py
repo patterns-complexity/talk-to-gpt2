@@ -25,8 +25,7 @@ class SpeechRecognizer:
     return self.processor(audio_file, sampling_rate=sampling_rate, return_tensors="pt", padding=True).to("cuda:0")
 
   def get_logits(self, inputs: Tensor) -> Tensor:
-    with no_grad():
-      logits = self.model(inputs.input_values, attention_mask=inputs.attention_mask).logits
+    logits = self.model(inputs.input_values, attention_mask=inputs.attention_mask).logits
     return logits
   
   def get_predicted_ids(self, logits: Tensor) -> Tensor:
@@ -39,9 +38,10 @@ class SpeechRecognizer:
     return predicted_sentences[0]
 
   def predict(self, audio_file: Tensor, sampling_rate: int = 16_000) -> str:
-    inputs = self.get_inputs(audio_file, sampling_rate=sampling_rate)
-    logits = self.get_logits(inputs)
-    predicted_ids = self.get_predicted_ids(logits)
-    predicted_sentences = self.get_predicted_sentences(predicted_ids)
-    text = self.get_text(predicted_sentences)
+    with no_grad():
+      inputs = self.get_inputs(audio_file, sampling_rate=sampling_rate)
+      logits = self.get_logits(inputs)
+      predicted_ids = self.get_predicted_ids(logits)
+      predicted_sentences = self.get_predicted_sentences(predicted_ids)
+      text = self.get_text(predicted_sentences)
     return text
