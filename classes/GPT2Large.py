@@ -1,5 +1,5 @@
-from torch import no_grad, Tensor, cat, zeros, float32, long, tensor
-from transformers import GPT2LMHeadModel, GPT2Tokenizer, pipeline
+from torch import Tensor, float32
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 class GPT2Large:
   def __init__(self, model_id: str):

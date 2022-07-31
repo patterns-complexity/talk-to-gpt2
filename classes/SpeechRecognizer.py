@@ -1,10 +1,7 @@
 from torch import Tensor, argmax, no_grad
 from torchaudio.transforms import Resample
 from torchaudio import load
-from transformers import (
-  Wav2Vec2ForCTC,
-  Wav2Vec2Processor,
-)
+from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 
 class SpeechRecognizer:
   def __init__(self, lang: str, model_id: str):
