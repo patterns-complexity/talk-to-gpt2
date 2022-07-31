@@ -30,7 +30,7 @@ if __name__ == '__main__':
   print('Loading constants from cli arguments...')
   parser = argparse.ArgumentParser()
   parser.add_argument('--al', '--audio-level-threshold', type=float, default=0.003)
-  parser.add_argument('--nl', '--noise-evaluation-time', type=int, default=10)
+  parser.add_argument('--nlt', '--noise-evaluation-time', type=int, default=10)
   parser.add_argument('--ttt', '--time-to-talk', type=int, default=120)
   parser.add_argument('--lang', '--language', type=str, default="en")
   parser.add_argument('--srm', '--speech-recognition-model', type=str, default="jonatasgrosman/wav2vec2-large-xlsr-53-english")
@@ -38,7 +38,7 @@ if __name__ == '__main__':
   parser.add_argument('--tempfile', '--audio-temp-file-path', type=str, default="audio.wav")
   parser.add_argument('--top-p', type=float, default=0.9)
   parser.add_argument('--top-k', type=int, default=0)
-  parser.add_argument('--temperature', type=float, default=1.0)
+  parser.add_argument('--temp', '--temperature', type=float, default=1.0)
 
 
   # parse the cli arguments
@@ -47,7 +47,7 @@ if __name__ == '__main__':
   print(args)
 
   THRESHOLD: float = args.al
-  NOISE_LEVEL_CAPTURE_TIMEOUT: int = args.nl
+  NOISE_LEVEL_CAPTURE_TIMEOUT: int = args.nlt
   TALKING_TIMEOUT: int = args.ttt
   LANG_ID: str = args.lang
   SR_MODEL_ID: str = args.srm
@@ -55,7 +55,7 @@ if __name__ == '__main__':
   FILE_NAME: str = args.tempfile
   TOP_P: float = args.top_p
   TOP_K: int = args.top_k
-  TEMPERATURE: float = args.temperature
+  TEMPERATURE: float = args.temp
 
   # set the computing device to cuda if available
   print('Setting the computing device to cuda if available...')

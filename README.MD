@@ -35,9 +35,37 @@ You probably noticed that there is no punctuation or capitalization in those que
 
 ## Usage
 Run the `app.py` file in the root folder of the project.
+
 ```
 python3 app.py
 ```
+
+This will run the project with default parameters of:
+- top_p: 0.9
+- top_k: 0
+- temperature: 1.0
+
+You can change these parameters by passing them as arguments to the program. For example:
+
+```
+python3 app.py --top-p 0.98 --top-k 0 --temp 0.6
+```
+
+Here's a list of all parameters and their default values:
+
+```
+  --al / --audio-level-threshold = 0.003
+  --nlt / --noise-evaluation-time = 10
+  --ttt / --time-to-talk = 120
+  --lang / --language = "en"
+  --srm / --speech-recognition-model = "jonatasgrosman/wav2vec2-large-xlsr-53-english"
+  --tgm / --text-generation-model = "gpt2-large"
+  --tempfile / --audio-temp-file-path = "audio.wav"
+  --top-p = 0.9
+  --top-k = 0
+  --temp / --temperature = 1.0
+```
+
 The application will ask you to specify the audio device you want to use to communicate. Pick the device by typing its index.
 
 Example below:
